@@ -11,11 +11,15 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
                     },
                   {
                       path: "/top",
-                      component: require("../news-list")
+                      component: require("../story-list")
                     },
                   {
-                      path: "/item/:id",
-                      component: require("../news")
+                      path: "/new",
+                      component: require("../story-add")
+                    },
+                  {
+                      path: "/story/:id",
+                      component: require("../story-show")
                     }
                 ];
 
@@ -54,7 +58,7 @@ function render(input, out, __component, component, state) {
   router_link_tag({
       path: "/",
       renderBody: function renderBody(out) {
-        out.w("<img class=\"logo\" src=\"/logo-48.png\" alt=\"logo\">");
+        out.w("Home");
       }
     }, out);
 
@@ -72,37 +76,9 @@ function render(input, out, __component, component, state) {
       }
     }, out);
 
-  router_link_tag({
-      path: "/show",
-      renderBody: function renderBody(out) {
-        out.w("Show");
-      }
-    }, out);
-
-  router_link_tag({
-      path: "/ask",
-      renderBody: function renderBody(out) {
-        out.w("Ask");
-      }
-    }, out);
-
-  router_link_tag({
-      path: "/job",
-      renderBody: function renderBody(out) {
-        out.w("Jobs");
-      }
-    }, out);
-
-  router_link_tag({
-      path: "/item/3",
-      renderBody: function renderBody(out) {
-        out.w("Item 3");
-      }
-    }, out);
-
   out.w("<a class=\"github\" href=\"#\" target=\"_blank\" rel=\"noopener\">Built with Huncwot </a></nav></header><section class=\"section\"" +
     marko_attr("id", __component.elId("_r1")) +
-    "><div class=\"container\"><div" +
+    "><div class=\"container view\"><div" +
     marko_attr("id", __component.elId("router-container")) +
     "></div></div></section>");
 }
@@ -121,7 +97,7 @@ marko_template.meta = {
     deps: [
       {
           type: "css",
-          code: "body {\n\tfont-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", sans-serif;\n\tfont-size: 15px;\n\tbackground-color: #f2f3f5;\n\tmargin: 0;\n\tpadding-top: 55px;\n\tcolor: #34495e;\n\toverflow-y: scroll;\n}\n\na {\n\tcolor: #34495e;\n\ttext-decoration: none;\n}\n\n.header {\n\tbackground-color: #f60;\n\tposition: fixed;\n\tz-index: 999;\n\theight: 55px;\n\ttop: 0;\n\tleft: 0;\n\tright: 0;\n}\n\n.header .inner {\n\tmax-width: 800px;\n\tbox-sizing: border-box;\n\tmargin: 0px auto;\n\tpadding: 15px 5px;\n}\n\n.header a {\n\tcolor: rgba(255,255,255,0.8);\n\tline-height: 24px;\n\ttransition: color 0.15s ease;\n\tdisplay: inline-block;\n\tvertical-align: middle;\n\tfont-weight: 300;\n\tletter-spacing: 0.075em;\n\tmargin-right: 1.8em;\n}\n\n.header a:hover {\n\tcolor: #fff;\n}\n\n.header a.router-link-active {\n\tcolor: #fff;\n\tfont-weight: 400;\n}\n\n.header a:nth-child(6) {\n\tmargin-right: 0;\n}\n\n.header .github {\n\tcolor: #fff;\n\tfont-size: 0.9em;\n\tmargin: 0;\n\tfloat: right;\n}\n\n.logo {\n\twidth: 24px;\n\tmargin-right: 10px;\n\tdisplay: inline-block;\n\tvertical-align: middle;\n}\n\n.view {\n\tmax-width: 800px;\n\tmargin: 0 auto;\n\tposition: relative;\n}\n\n.fade-enter-active,\n.fade-leave-active {\n\ttransition: all 0.2s ease;\n}\n\n.fade-enter,\n.fade-leave-active {\n\topacity: 0;\n}\n\n@media (max-width: 860px) {\n\t.header .inner {\n\t\tpadding: 15px 30px;\n\t}\n}\n\n@media (max-width: 600px) {\n\t.header .inner {\n\t\tpadding: 15px;\n\t}\n\n\t.header a {\n\t\tmargin-right: 1em;\n\t}\n\n\t.header .github {\n\t\tdisplay: none;\n\t}\n}",
+          code: "body {\n\t\tfont-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", sans-serif;\n\t\tbackground-color: #f2f3f5;\n\t\tmargin: 0;\n\t\tpadding-top: 55px;\n\t\tcolor: #34495e;\n\t\toverflow-y: scroll;\n\t}\n\n\ta {\n\t\tcolor: #34495e;\n\t\ttext-decoration: none;\n\t}\n\n\t.header {\n\t\tbackground-color: #f60;\n\t\tposition: fixed;\n\t\tz-index: 999;\n\t\theight: 55px;\n\t\ttop: 0;\n\t\tleft: 0;\n\t\tright: 0;\n\t}\n\n\t.header .inner {\n\t\tmax-width: 800px;\n\t\tbox-sizing: border-box;\n\t\tmargin: 0px auto;\n\t\tpadding: 15px 5px;\n\t}\n\n\t.header a {\n\t\tcolor: rgba(255,255,255,0.8);\n\t\tline-height: 24px;\n\t\ttransition: color 0.15s ease;\n\t\tdisplay: inline-block;\n\t\tvertical-align: middle;\n\t\tfont-weight: 300;\n\t\tletter-spacing: 0.075em;\n\t\tmargin-right: 1.8em;\n\t}\n\n\t.header a:hover {\n\t\tcolor: #fff;\n\t}\n\n\t.header a.router-link-active {\n\t\tcolor: #fff;\n\t\tfont-weight: 400;\n\t}\n\n\t.logo {\n\t\twidth: 24px;\n\t\tmargin-right: 10px;\n\t\tdisplay: inline-block;\n\t\tvertical-align: middle;\n\t}\n\n\t.view {\n\t\tmax-width: 800px;\n\t\tmargin: 0 auto;\n\t\tposition: relative;\n\t}",
           virtualPath: "./index.marko.css",
           path: "./index.marko"
         },

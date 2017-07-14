@@ -10,7 +10,7 @@ class {
 
   onMount() {
     store.subscribe(() => {
-      this.state = store.getState();
+      this.state = store.getState().toJS();
       this.forceUpdate();
     });
   }
@@ -18,11 +18,16 @@ class {
   dispatch(action) {
     store.dispatch(action);
   }
+
+  onAdd({ title, url }) {
+    this.dispatch({ type: 'CREATE_STORY', title, url })
+  }
 }
 
 style {
   .news-list ul {
     list-style: none;
+    padding: 0;
   }
 }
 
@@ -32,10 +37,12 @@ style {
   </div>
   <div.news-list>
     <ul>
-      ${JSON.stringify(state.stories[0])}
-      <for(item in state.stories)>
-        <news-item(item) key='news[]' on-upvote('dispatch', { type: 'UPVOTE', id: item.id }) />
+      <for(story in state.stories)>
+        <story(story) key='stories[]' on-upvote('dispatch', { type: 'PUT_STORY', id: story.id, score: story.score + 1 }) />
       </for>
     </ul>
   </div>
+
+  <story-add on-add('onAdd') />
 </div>
+

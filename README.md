@@ -1,8 +1,22 @@
-# README
+# huncwot-stories 
 
 ## Getting Started
 
-Start the application with
+### Clone the repository
+
+```
+git clone https://github.com/zaiste/huncwot-stories.git 
+```
+
+### Prepare the DB
+
+### Install dependencies
+
+```
+yarn
+```
+
+### Start the application with
 
 ```
 huncwot server

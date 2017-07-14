@@ -18,7 +18,7 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out) {
   var data = input;
 
-  out.w("<!doctype html><html><head><title>Basic Huncwot App Example</title>");
+  out.w("<!doctype html><html><head><title>Basic Huncwot App Example</title><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.3/css/bulma.min.css\">");
 
   include_stylesheets_tag({}, out);
 

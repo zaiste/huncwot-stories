@@ -9,7 +9,7 @@ style {
 
   .news-item .score {
     color: #f60;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 700;
     position: absolute;
     top: 50%;
@@ -35,6 +35,10 @@ style {
   .news-item .host a:hover {
     color: #f60;
   }
+
+  .upvote a {
+    margin-right: 12px;
+  }
 }
 
 class {
@@ -45,16 +49,16 @@ class {
 
 <li class="news-item">
   <span class="upvote">
-    <a href='#' on-click('upvote')>+</a>
+    <a.button.is-small on-click('upvote')>+</a>
   </span>
   <span class="score">${input.score}</span>
-  <span class="title">
+  <span>
     <if (input.url)>
       <a href="${input.url}" target="_blank" rel="noopener">${input.title}</a>
       <span class="host"> (${input.url})</span>
     </if>
     <else>
-      <router-link path="/item?id=${input.id}">${input.title}</router-link>
+      <router-link path="/stories/${input.id}">${input.title}</router-link>
     </else>
   </span>
   <br>
