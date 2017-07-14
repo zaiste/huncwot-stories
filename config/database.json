@@ -1,0 +1,17 @@
+{
+  "development": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "huncwot_stories"
+  },
+  "test": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "huncwot_stories"
+  },
+  "production": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "huncwot_stories"
+  }
+}

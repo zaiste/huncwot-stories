@@ -1,0 +1,41 @@
+import { Router } from 'marko-path-router';
+import axios from 'axios';
+import store from '../../store';
+
+class {
+  onCreate() {
+    this.state = { stories: [] }
+    this.dispatch({ type: 'FETCH_STORIES' });
+  }
+
+  onMount() {
+    store.subscribe(() => {
+      this.state = store.getState();
+      this.forceUpdate();
+    });
+  }
+
+  dispatch(action) {
+    store.dispatch(action);
+  }
+}
+
+style {
+  .news-list ul {
+    list-style: none;
+  }
+}
+
+<div class="news-view">
+  <div class="news-list-nav">
+    News List Nav
+  </div>
+  <div.news-list>
+    <ul>
+      ${JSON.stringify(state.stories[0])}
+      <for(item in state.stories)>
+        <news-item(item) key='news[]' on-upvote('dispatch', { type: 'UPVOTE', id: item.id }) />
+      </for>
+    </ul>
+  </div>
+</div>
